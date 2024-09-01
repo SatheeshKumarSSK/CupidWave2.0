@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { RegisterComponent } from '../register/register.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RegisterComponent],
+  imports: [RegisterComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

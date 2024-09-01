@@ -4,8 +4,8 @@
             <h1>Find your matches</h1>
             <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
             <div class="text-center">
-                <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Register</button>
-                <button class="btn btn-info btn-lg me-2">Learn more</button>
+                <button (click)="registerToggle()" class="btn btn-info btn-lg me-2">Register</button>
+                <button class="btn btn-light btn-lg me-2">Learn more</button>
             </div>
         </div>
     }@else if (registerMode && !accountService.currentUser()){
@@ -22,7 +22,7 @@
         <div style="text-align:center">
             <h1>CUPIDWAVE</h1>
             <h3>Welcome to CupidWave</h3>
-            <button class="btn btn-outline-info">Explore The App</button>
+            <button routerLink="/members" routerLinkActive="router-link-active"  class="btn btn-outline-info">Explore The App</button>
         </div>
     }
 </div>
