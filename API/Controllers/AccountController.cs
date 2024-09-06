@@ -1,6 +1,5 @@
 ﻿using API.Data;
 using API.DTOs;
-using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,19 +15,21 @@ namespace API.Controllers
         {
             if (await UserExists(registerDto.Username)) return BadRequest("UserName is taken");
 
-            using var hmac = new HMACSHA512();
+            return Ok();
 
-            var user = new AppUser()
-            {
-                UserName = registerDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+            //using var hmac = new HMACSHA512();
 
-            context.AppUsers.Add(user);
-            await context.SaveChangesAsync();
+            //var user = new AppUser()
+            //{
+            //    UserName = registerDto.Username.ToLower(),
+            //    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+            //    PasswordSalt = hmac.Key
+            //};
 
-            return new UserDto { Username = registerDto.Username, Token = tokenService.CreateToken(user) };
+            //context.AppUsers.Add(user);
+            //await context.SaveChangesAsync();
+
+            //return new UserDto { Username = registerDto.Username, Token = tokenService.CreateToken(user) };
         }
 
         [HttpPost("login")]
