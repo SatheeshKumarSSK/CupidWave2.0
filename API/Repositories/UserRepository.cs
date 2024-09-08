@@ -36,7 +36,7 @@ namespace API.Repositories
             return await context.AppUsers.Include(a => a.Photos).ToListAsync();
         }
 
-        public async Task<bool> SaveAsync()
+        public async Task<bool> SaveAllAsync()
         {
             return await context.SaveChangesAsync() > 0;
         }
