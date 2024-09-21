@@ -12,7 +12,7 @@ namespace API.Repositories
     {
         public async Task<MemberDto?> GetMemberAsync(string username)
         {
-            return await context.AppUsers.Where(a => a.UserName == username)
+            return await context.AppUsers.Where(a => a.UserName == username.ToLower())
                 .ProjectTo<MemberDto>(mapper.ConfigurationProvider).SingleOrDefaultAsync();
         }
 
