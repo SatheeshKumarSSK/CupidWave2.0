@@ -5,6 +5,7 @@ using API.DTOs;
 using AutoMapper;
 using API.Extensions;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -12,9 +13,13 @@ namespace API.Controllers
     public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService) : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetAppUsers()
+        public async Task<ActionResult<PagedList<MemberDto>>> GetAppUsers([FromQuery] UserParams userParams)
         {
-            var users = await userRepository.GetMembersAsync();
+            userParams.CurrentUserName = User.GetUsername();
+
+            var users = await userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users);
 
             return Ok(users);
         }

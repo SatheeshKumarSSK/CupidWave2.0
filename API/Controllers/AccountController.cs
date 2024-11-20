@@ -3,7 +3,6 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -33,6 +32,7 @@ namespace API.Controllers
             {
                 Username = registerDto.Username,
                 KnownAs = registerDto.KnownAs,
+                Gender = registerDto.Gender,
                 Token = tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault()?.Url
             };
@@ -58,6 +58,7 @@ namespace API.Controllers
             {
                 Username = loginDto.Username,
                 KnownAs = user.KnownAs,
+                Gender = user.Gender,
                 Token = tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url
             };

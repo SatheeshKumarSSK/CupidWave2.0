@@ -59,6 +59,7 @@ export class PhotoEditorComponent implements OnInit {
           }
 
           updatedMember.photoUrl = photo.url;
+          this.memberService.setMainPhoto(photo, true);
           this.memberChange.emit(updatedMember);
         }
         else {
@@ -69,7 +70,7 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   setMainPhoto(photo: Photo) {
-    this.memberService.setMainPhoto(photo).subscribe({
+    this.memberService.setMainPhoto(photo, false).subscribe({
       next: _ => {
         const user = this.accountService.currentUser();
         if (user) {
