@@ -15,7 +15,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto registerDto)
         {
-            if (await UserExists(registerDto.Username)) return BadRequest("UserName is taken");
+            if (await UserExists(registerDto.Username)) return BadRequest("Username is already taken");
 
             using var hmac = new HMACSHA512();
 

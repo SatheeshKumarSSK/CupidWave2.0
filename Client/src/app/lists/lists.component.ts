@@ -1,6 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { LikesService } from '../_services/likes.service';
-import { Member } from '../_models/member';
 import { MemberCardComponent } from '../members/member-card/member-card.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +15,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 export class ListsComponent implements OnInit, OnDestroy {
   likesService = inject(LikesService);
   predicate = 'liked';
-  members: Member[] = [];
   pageNumber = 1;
   pageSize = 5;
 
