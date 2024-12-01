@@ -6,11 +6,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MembersService } from '../_services/members.service';
+import { HasRoleDirective } from '../_directives/has-role.directive';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, CommonModule, BsDropdownModule, RouterModule],
+  imports: [FormsModule, CommonModule, BsDropdownModule, RouterModule, HasRoleDirective],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })

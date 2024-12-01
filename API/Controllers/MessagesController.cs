@@ -22,7 +22,8 @@ namespace API.Controllers
             var sender = await userRepository.GetUserAsync(username);
             var recipient = await userRepository.GetUserAsync(createMessageDto.RecipientUsername);
 
-            if (sender == null || recipient == null) return BadRequest("Could not find user");
+            if (sender == null || recipient == null || sender.UserName == null || recipient.UserName == null) 
+                return BadRequest("Could not find user");
 
             var message = new Message
             {
