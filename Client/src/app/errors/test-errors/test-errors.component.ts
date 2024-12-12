@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
   styleUrl: './test-errors.component.css'
 })
 export class TestErrorsComponent {
-  http = inject(HttpClient);
+  private http = inject(HttpClient);
   baseUrl = environment.apiUrl;
   validationErrors: string[] = [];
 

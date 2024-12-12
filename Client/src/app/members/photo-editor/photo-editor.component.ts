@@ -15,8 +15,8 @@ import { MembersService } from '../../_services/members.service';
   styleUrl: './photo-editor.component.css'
 })
 export class PhotoEditorComponent implements OnInit {
-  accountService = inject(AccountService);
-  memberService = inject(MembersService);
+  private accountService = inject(AccountService);
+  private memberService = inject(MembersService);
   member = input.required<Member>();
   uploader?: FileUploader;
   hasBaseDropzoneOver = false;

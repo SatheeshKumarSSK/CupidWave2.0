@@ -15,7 +15,7 @@ import { AccountService } from '../../_services/account.service';
   styleUrl: './member-list.component.css'
 })
 export class MemberListComponent implements OnInit {
-  accountService = inject(AccountService);
+  private accountService = inject(AccountService);
   membersService = inject(MembersService);
   genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }];
 

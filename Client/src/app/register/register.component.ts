@@ -13,9 +13,9 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-  accountService = inject(AccountService);
-  formBuilder = inject(FormBuilder);
-  router = inject(Router);
+  private accountService = inject(AccountService);
+  private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
   cancelRegister = output<boolean>();
   model: any = {};
   registerForm: FormGroup = new FormGroup({});

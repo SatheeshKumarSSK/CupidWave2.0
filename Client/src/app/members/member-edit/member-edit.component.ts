@@ -24,9 +24,9 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
-  accountService = inject(AccountService);
-  memberService = inject(MembersService);
-  toastr = inject(ToastrService);
+  private accountService = inject(AccountService);
+  private memberService = inject(MembersService);
+  private toastr = inject(ToastrService);
   member?: Member;
 
   ngOnInit(): void {

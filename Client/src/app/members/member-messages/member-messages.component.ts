@@ -1,5 +1,4 @@
-import { Component, inject, input, output, ViewChild } from '@angular/core';
-import { Message } from '../../_models/message';
+import { AfterViewChecked, Component, ElementRef, inject, input, ViewChild } from '@angular/core';
 import { MessageService } from '../../_services/message.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgStyle } from '@angular/common';
@@ -12,23 +11,28 @@ import { TimeagoModule } from 'ngx-timeago';
   templateUrl: './member-messages.component.html',
   styleUrl: './member-messages.component.css'
 })
-export class MemberMessagesComponent {
+export class MemberMessagesComponent implements AfterViewChecked {
   @ViewChild('messageForm') messageForm?: NgForm;
+  @ViewChild('scrollMe') private myScrollContainer?: ElementRef;
   username = input.required<string>();
-  messages = input.required<Message[]>();
-  updatedMessage = output<Message>();
   messageService = inject(MessageService);
   messageContent: string = "";
   loading = false;
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    if (this.myScrollContainer)
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+  }
+
   sendMessage() {
     this.loading = true;
-    this.messageService.sendMessage(this.username(), this.messageContent).subscribe({
-      next: response => {
-        this.updatedMessage.emit(response);
-        this.messageForm?.reset();
-        this.loading = false;
-      }
+    this.messageService.sendMessage(this.username(), this.messageContent)?.then(() => {
+      this.messageForm?.reset();
+      this.loading = false;
     })
   }
 }

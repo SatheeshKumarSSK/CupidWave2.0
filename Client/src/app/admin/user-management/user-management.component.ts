@@ -13,7 +13,7 @@ import { RolesModalComponent } from '../../modals/roles-modal/roles-modal.compon
 })
 export class UserManagementComponent implements OnInit {
   private adminService = inject(AdminService);
-  modalService = inject(BsModalService);
+  private modalService = inject(BsModalService);
   users: User[] = [];
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
 

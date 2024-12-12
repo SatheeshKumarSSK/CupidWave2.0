@@ -4,13 +4,13 @@ using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MessagesController(IUserRepository userRepository, IMessageRepository messageRepository, IMapper mapper) : ControllerBase
+    [Authorize]
+    public class MessagesController(IUserRepository userRepository, IMessageRepository messageRepository, IMapper mapper) : BaseApiController
     {
         [HttpPost]
         public async Task<ActionResult<MessageDto>> CreateMessge(CreateMessageDto createMessageDto)
@@ -22,7 +22,7 @@ namespace API.Controllers
             var sender = await userRepository.GetUserAsync(username);
             var recipient = await userRepository.GetUserAsync(createMessageDto.RecipientUsername);
 
-            if (sender == null || recipient == null || sender.UserName == null || recipient.UserName == null) 
+            if (sender == null || recipient == null || sender.UserName == null || recipient.UserName == null)
                 return BadRequest("Could not find user");
 
             var message = new Message

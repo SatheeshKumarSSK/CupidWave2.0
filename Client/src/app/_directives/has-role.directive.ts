@@ -7,9 +7,9 @@ import { AccountService } from '../_services/account.service';
 })
 export class HasRoleDirective implements OnInit {
   @Input() appHasRole: string[] = [];
-  accountService = inject(AccountService);
-  viewContainerRef = inject(ViewContainerRef);
-  templateRef = inject(TemplateRef);
+  private accountService = inject(AccountService);
+  private viewContainerRef = inject(ViewContainerRef);
+  private templateRef = inject(TemplateRef);
 
   ngOnInit(): void {
     if (this.accountService.roles().some((role: string) => this.appHasRole.includes(role))) {
