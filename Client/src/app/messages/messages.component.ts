@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 import { TimeagoModule } from 'ngx-timeago';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ConfirmService } from '../_services/confirm.service';
 
 @Component({
   selector: 'app-messages',
@@ -16,6 +17,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
   styleUrl: './messages.component.css'
 })
 export class MessagesComponent implements OnInit {
+  private confirmService = inject(ConfirmService);
   messageService = inject(MessageService);
   container = 'Unread';
   pageNumber = 1;
@@ -30,17 +32,23 @@ export class MessagesComponent implements OnInit {
   }
 
   deleteMessage(id: number) {
-    this.messageService.deleteMessage(id).subscribe({
-      next: _ => {
-        this.messageService.paginatedResult.update(prev => {
-          if (prev && prev.items) {
-            prev.items.splice(prev.items.findIndex(x => x.id == id), 1);
-            return prev
-          }
-          else {
-            return prev;
-          }
-        })
+    this.confirmService.confirm('Confirm delete message', 'Are you sure you want to delete this message?')?.subscribe({
+      next: response => {
+        if (response) {
+          this.messageService.deleteMessage(id).subscribe({
+            next: _ => {
+              this.messageService.paginatedResult.update(prev => {
+                if (prev && prev.items) {
+                  prev.items.splice(prev.items.findIndex(x => x.id == id), 1);
+                  return prev
+                }
+                else {
+                  return prev;
+                }
+              })
+            }
+          })
+        }
       }
     })
   }

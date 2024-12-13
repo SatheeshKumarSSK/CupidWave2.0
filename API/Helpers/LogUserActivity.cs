@@ -10,13 +10,19 @@ namespace API.Helpers
         {
             var resultContext = await next();
 
-            if (!resultContext.HttpContext.User.Identity.IsAuthenticated) return;
+            if (resultContext == null || resultContext.HttpContext.User.Identity == null
+                || !resultContext.HttpContext.User.Identity.IsAuthenticated) return;
 
             var userId = resultContext.HttpContext.User.GetUserId();
-            var repository = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
-            var user = await repository.GetUserAsync(userId);
+
+            var unitOfWork = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
+            if (unitOfWork == null) return;
+
+            var user = await unitOfWork.UserRepository.GetUserAsync(userId);
+            if (user == null) return;
+
             user.LastActive = DateTime.UtcNow;
-            await repository.SaveAllAsync();
+            await unitOfWork.Complete();
         }
     }
 }

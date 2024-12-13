@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-body" #scrollMe style="overflow: scroll; height: 600px;">
+    <div class="card-body" #scrollMe style="overflow: scroll; height: 600px; scroll-behavior: smooth;" (scroll)="onScroll()">
         @if (messageService.messageThread().length === 0) {
             <div>
                 No messages yet... say hi by using the message box below

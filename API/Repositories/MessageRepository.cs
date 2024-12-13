@@ -26,11 +26,6 @@ namespace API.Repositories
             context.Messages.Remove(message);
         }
 
-        public async Task<Connection> GetConnection(string connectionId)
-        {
-            return await context.Connections.FindAsync(connectionId);
-        }
-
         public async Task<Group?> GetGroupForConnection(string connectionId)
         {
             return await context.Groups.Include(g => g.Connections)
@@ -77,7 +72,6 @@ namespace API.Repositories
             if (unreadMessages.Count != 0)
             {
                 unreadMessages.ForEach(u => u.DateRead = DateTime.UtcNow);
-                await SaveAllAsync();
             }
 
             return await query.ProjectTo<MessageDto>(mapper.ConfigurationProvider).ToListAsync();
@@ -86,11 +80,6 @@ namespace API.Repositories
         public void RemoveConnection(Connection connection)
         {
             context.Connections.Remove(connection);
-        }
-
-        public async Task<bool> SaveAllAsync()
-        {
-            return await context.SaveChangesAsync() > 0;
         }
     }
 }
