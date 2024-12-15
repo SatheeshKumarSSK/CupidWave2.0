@@ -47,6 +47,7 @@ export class MemberMessagesComponent implements AfterViewChecked {
       this.messageForm?.reset();
       this.disableScrollDown = false;
       this.scrollToBottom();
+    }).finally(() => {
       this.loading = false;
     })
   }

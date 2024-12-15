@@ -42,7 +42,7 @@ namespace API.Data
                 .HasOne(s => s.TargetUser)
                 .WithMany(f => f.Followers)
                 .HasForeignKey(s => s.TargetUserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Message>()
                 .HasOne(s => s.Sender)
