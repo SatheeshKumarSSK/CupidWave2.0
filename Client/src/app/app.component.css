@@ -1,0 +1,35 @@
+@media (min-width: 320px) {
+    .main {
+        margin-top: 16%;
+    }
+}
+
+@media (min-width: 410px) {
+    .main {
+        margin-top: 12%;
+    }
+}
+
+@media (min-width: 576px) {
+    .main {
+        margin-top: 8%;
+    }
+}
+
+@media (min-width: 768px) {
+    .main {
+        margin-top: 7%;
+    }
+}
+
+@media (min-width: 992px) {
+    .main {
+        margin-top: 6%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main {
+        margin-top: 5%;
+    }
+}
